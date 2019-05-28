@@ -1,4 +1,4 @@
-package controllers.toppage;
+package controllers.records;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,20 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Kakeibo;
+import models.Record;
 import models.User;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class TopPageIndexServlet
+ * Servlet implementation class RecordsIndexServlet
  */
-@WebServlet("/index.html")
-public class TopPageIndexServlet extends HttpServlet {
+@WebServlet("/records/index")
+public class RecordsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TopPageIndexServlet() {
+    public RecordsIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,33 +35,35 @@ public class TopPageIndexServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         EntityManager em = DBUtil.createEntityManager();
 
 
         User login_user = (User)request.getSession().getAttribute("login_user");
+        Kakeibo kakeibo = em.find(Kakeibo.class, Integer.parseInt(request.getParameter("id")));
 
 
-        int page;
-        try{
-            page = Integer.parseInt(request.getParameter("page"));
-        } catch(Exception e) {
-            page = 1;
+        //ログインユーザーと開く家計簿の作成者を照合
+        if(login_user.getId() == kakeibo.getUser().getId()){
+            //家計簿のレコードをリストに格納
+            List<Record> records = em.createNamedQuery("getRecords", Record.class)
+                    .setParameter("kakeibo", kakeibo)
+                    .getResultList();
+
+            if(records == null){
+
+            }
+
+
+            em.close();
+
+            request.setAttribute("kakeibo", kakeibo);
+            request.setAttribute("records", records);
+
+
+        }else{
+            //TODO 合致しなかった場合の動作どうしよう？
         }
-        List<Kakeibo> kakeibo = em.createNamedQuery("getMyAllKakeibo", Kakeibo.class)
-                                  .setParameter("user", login_user)
-                                  .setFirstResult(15 * (page - 1))
-                                  .setMaxResults(15)
-                                  .getResultList();
-
-        long kakeibo_count = (long)em.createNamedQuery("getMyKakeiboCount", Long.class)
-                                     .setParameter("user", login_user)
-                                     .getSingleResult();
-
-        em.close();
-
-        request.setAttribute("kakeibo", kakeibo);
-        request.setAttribute("kakeibo_count", kakeibo_count);
-        request.setAttribute("page", page);
 
 
         if(request.getSession().getAttribute("flush") != null) {
@@ -69,8 +72,10 @@ public class TopPageIndexServlet extends HttpServlet {
         }
 
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/records/index.jsp");
         rd.forward(request, response);
     }
+
 
 }

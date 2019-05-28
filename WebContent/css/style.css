@@ -31,7 +31,7 @@ h1 {
 }
 
 h1 {
-    font-size: 24;
+    font-size: 24px;
     display: inline;
 }
 
@@ -117,13 +117,13 @@ button {
 }
 
 
-table#employee_list th {
+table#user_list th {
     width: 30%;
     padding: 10px 2%;
 }
 
 
-table#employee_list td {
+table#user_list td {
     width: 29%;
     padding: 10px 2%;
 }
@@ -152,7 +152,7 @@ select {
 }
 
 
-#employee_name {
+#user_name {
     color: #cccccc;
     width: 36%;
     padding-right: 3%;
@@ -173,31 +173,74 @@ h1 a {
 
 
 /* report_listをclassにしてみる。フォロー中の日報を表示したいので。20190430 */
-table.report_list th {
+table.kakeibo_list th {
     font-weight: bold;
     paddin: 10px 2%;
 }
 
 
-table.report_list .report_name {
+table.kakeibo_list .report_name {
     width: 20%;
     padding: 10px 2%;
 }
 
 
-table.report_list .report_date {
-    width: 20%;
+table.kakeibo_list .kakeibo_updated {
+    width: 10%;
 }
 
 
-table.report_list .report_title {
+table.kakeibo_list .kakeibo_pageName {
     width: 37%;
 }
 
 
-table.report_list .report_action {
-    width: 13%;
+table.kakeibo_list .kakeibo_action {
+    width: 5%;
 }
+
+
+table.record_list th {
+    font-weight: bold;
+    paddin: 10px 2%;
+}
+
+
+table.record_list .record_date {
+    width: 7%;
+}
+
+
+table.record_list .record_item {
+    width: 15%;
+}
+
+
+table.record_list .record_tag {
+    width: 7%;
+}
+
+
+table.record_list .record_income {
+    width: 5%;
+}
+
+
+table.record_list .record_spending {
+    width: 5%;
+}
+
+
+table.record_list .record_total {
+    width: 5%;
+}
+
+
+table.record_list .record_action {
+    width: 5%;
+}
+
+
 
 
 pre {
