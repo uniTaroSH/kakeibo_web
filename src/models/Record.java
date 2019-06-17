@@ -21,12 +21,12 @@ import javax.persistence.Table;
             query = "SELECT r FROM Record AS r WHERE r.kakeibo = :kakeibo AND r.delete_flag = 0 ORDER BY r.date ASC"
             ),
     @NamedQuery(
-            name = "getAllIncome",
-            query = "SELECT SUM(r.income) FROM Record AS r WHERE r.kakeibo = :kakeibo AND r.delete_flag = 0"
+            name = "getTagIncomeSUM",
+            query = "SELECT SUM(r.income) FROM Record AS r WHERE r.kakeibo = :kakeibo AND r.tag = :tag AND r.delete_flag = 0"
             ),
     @NamedQuery(
-            name = "getAllSpending",
-            query = "SELECT SUM(r.spending) FROM Record AS r WHERE r.kakeibo = :kakeibo AND r.delete_flag = 0"
+            name = "getTagSpendingSUM",
+            query = "SELECT SUM(r.spending) FROM Record AS r WHERE r.kakeibo = :kakeibo AND r.tag = :tag AND r.delete_flag = 0"
             )
 
 

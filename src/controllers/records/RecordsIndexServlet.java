@@ -35,7 +35,7 @@ public class RecordsIndexServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setAttribute("_token", request.getSession().getId());
         EntityManager em = DBUtil.createEntityManager();
 
 
@@ -48,7 +48,11 @@ public class RecordsIndexServlet extends HttpServlet {
             //家計簿のレコードをリストに格納
             List<Record> records = em.createNamedQuery("getRecords", Record.class)
                     .setParameter("kakeibo", kakeibo)
+
                     .getResultList();
+
+
+
 
             if(records == null){
 

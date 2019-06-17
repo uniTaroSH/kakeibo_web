@@ -11,6 +11,7 @@ body {
     width: 100%;
     height: 70px;
     background-color: #333333;
+    position: fixed;
 }
 
 
@@ -92,6 +93,7 @@ button {
 
 #footer {
     text-align: center;
+
 }
 
 
@@ -172,16 +174,10 @@ h1 a {
 
 
 
-/* report_listをclassにしてみる。フォロー中の日報を表示したいので。20190430 */
+
 table.kakeibo_list th {
     font-weight: bold;
     paddin: 10px 2%;
-}
-
-
-table.kakeibo_list .report_name {
-    width: 20%;
-    padding: 10px 2%;
 }
 
 
@@ -200,44 +196,168 @@ table.kakeibo_list .kakeibo_action {
 }
 
 
+
+
 table.record_list th {
     font-weight: bold;
     paddin: 10px 2%;
 }
 
 
-table.record_list .record_date {
+table.record_list tbody {
+    height: 100px;
+    overflow-y: scroll;
+}
+
+
+table.record_list .date {
     width: 7%;
 }
 
 
-table.record_list .record_item {
+table.record_list .item {
     width: 15%;
 }
 
 
-table.record_list .record_tag {
+table.record_list .tag {
     width: 7%;
 }
 
 
-table.record_list .record_income {
+table.record_list .income {
     width: 5%;
 }
 
 
-table.record_list .record_spending {
+table.record_list .spending {
     width: 5%;
 }
 
 
-table.record_list .record_total {
+table.record_list .total {
     width: 5%;
 }
 
 
-table.record_list .record_action {
+table.record_list .action {
     width: 5%;
+}
+
+
+
+
+/* 外枠部分 */
+div.y_data_area {
+  width: 1800px;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+}
+
+/* タイトル部分 */
+table.y_data_title {
+  width: 1800px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0; /* tableのcellspacing="0"の代わり */
+}
+
+table.y_data_title th {
+  border-top: 1px solid #CCC;
+  /*background: #EEF1F4;*/
+  text-align: center;
+  font-weight: bold;
+}
+
+table.y_data_title th,
+table.y_data_title td {
+  padding: 2px;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+}
+
+table.y_data_title th.r_none,
+table.y_data_title td.r_none {
+  border-right: none; /* 右ボーダーの重なりを防止 */
+}
+
+/* データ部分 */
+div.y_scroll_box {
+  width: 1800px;
+  max-height: 500px;
+  height: auto !important; /* IE6 max-height対応 */
+  height: 100px;　/* IE6 max-height対応 */
+  overflow-x: hidden; /* 横スクロール非表示 */
+  overflow-y: scroll; /* 縦スクロール */
+}
+
+div.y_hidden {
+  overflow: hidden; /* IE系でデータ部分のテーブルをドラッグした際のズレを防止 */
+  padding: 0 0 10px; /* スクロール仕切った際の下ボーダーの重なりを防止 */
+}
+
+table.y_data {
+  width: 1800px;
+  border-collapse: separate;
+  border-spacing: 0; /* tableのcellspacing="0"の代わり */
+  table-layout: fixed;　/* 内容を固定 */
+}
+
+table.y_data th,
+table.y_data td {
+  padding: 2px;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+}
+
+table.y_data td {
+  overflow: hidden; /* データが幅を超えたとき非表示に */
+  white-space: nowrap; /* データの折り返しを防止 */
+}
+
+table.y_data td p {
+  margin: 0; /* 余分なマージンを消去 */
+}
+
+table.y_data_title th.date,
+table.y_data td.date {
+    width:20px;
+}
+
+table.y_data_title th.item,
+table.y_data td.item {
+    width:50px;
+}
+
+table.y_data_title th.tag,
+table.y_data td.tag {
+    width:20px;
+}
+
+table.y_data_title th.income,
+table.y_data td.income {
+    width:15px;
+}
+
+table.y_data_title th.spending,
+table.y_data td.spending {
+    width:15px;
+}
+
+table.y_data_title th.total,
+table.y_data td.total {
+    width:10px;
+}
+
+table.y_data_title th.action,
+table.y_data td.action {
+    width:10px;
+}
+
+
+div.input_area {
+    background-color: #d4edda;
 }
 
 
@@ -246,6 +366,8 @@ table.record_list .record_action {
 pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
 }
+
+
 
 
 h3 {

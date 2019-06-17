@@ -7,7 +7,6 @@
         <title>家計簿アプリ</title>
         <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
         <link rel="stylesheet" href="<c:url value='/css/style.css' />">
-
     </head>
     <body>
         <div id="wrapper">
@@ -30,17 +29,10 @@
                 </c:if>
             </div>
             <div id="content">
-                <br /><br/><br/><br/>
                 ${param.content}
             </div>
             <div id="footer">
-                <div id=footer_content>
-                    ${param.footer_content}
-                </div>
-                <br />
-                <br />
-                <br />
-                by Keisuke Oosako
+                フッタースペース
             </div>
         </div>
     </body>
